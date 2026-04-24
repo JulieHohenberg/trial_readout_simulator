@@ -1,5 +1,7 @@
 # Competitive Readout Simulator
 
+**Author: Julie Hohenberg**
+
 A Monte Carlo simulation tool that predicts when a clinical trial will announce its results ("read out"). Built for competitive intelligence and strategy teams who need to anticipate competitor timelines.
 
 Instead of giving a single predicted date, the tool runs thousands of simulated trials and returns a probability distribution — e.g., "80% chance of final readout between January and July 2028."
@@ -224,13 +226,3 @@ This gives the CSI team a defensible probabilistic range instead of a single dat
 
 **Use for directional estimates, not regulatory submissions.** This tool is designed for competitive intelligence — rough timeline forecasting with appropriate uncertainty. It should not be used as a substitute for formal trial design software (EAST, PASS, rpact).
 
----
-
-## Roadmap
-
-- [ ] Weibull survival distribution for non-proportional hazards
-- [ ] Scenario comparison (save and overlay multiple assumption sets)
-- [ ] Delayed treatment effect modeling (for immunotherapy)
-- [ ] Multi-region enrollment with regional activation timelines
-- [ ] AI agent layer: auto-ingest ClinicalTrials.gov updates and ASCO abstracts, propose updated assumptions
-- [ ] Real-world data integration for control arm median benchmarks
