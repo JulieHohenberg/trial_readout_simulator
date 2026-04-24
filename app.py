@@ -135,7 +135,7 @@ for col in ["P10 date (optimistic)", "P50 date (median)", "P90 date (conservativ
     display_summary[col] = display_summary[col].apply(
         lambda d: d.strftime("%b %Y") if d is not None else "—"
     )
-st.dataframe(display_summary, use_container_width=True, hide_index=True)
+st.dataframe(display_summary, width="stretch", hide_index=True)
 
 st.caption(
     "P10 = 10% of simulations hit this milestone earlier than this date. "
@@ -169,7 +169,7 @@ fig.update_layout(
     height=400,
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
 )
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 # ---------- Sensitivity analysis ----------
 with st.expander("Sensitivity analysis: how does HR affect readout timing?"):
@@ -195,18 +195,24 @@ with st.expander("Sensitivity analysis: how does HR affect readout timing?"):
                 "P50 months from start": round(p50_months, 1),
                 "Events needed": required_events(round(hr, 2), alpha_two_sided, power, randomization_ratio),
             })
-    st.dataframe(pd.DataFrame(sensitivity_rows), use_container_width=True, hide_index=True)
+    st.dataframe(pd.DataFrame(sensitivity_rows), width="stretch", hide_index=True)
 
 # ---------- Raw data download ----------
 with st.expander("Download raw simulation output"):
-    csv = df.to_csv(index=False).encode("utf-8")
+    # Convert mixed-type column names (floats + strings) to strings for clean display
+    display_df = df.copy()
+    display_df.columns = [
+        f"{int(c*100)}% IF" if isinstance(c, float) else c
+        for c in display_df.columns
+    ]
+    csv = display_df.to_csv(index=False).encode("utf-8")
     st.download_button(
         "Download CSV",
         csv,
         file_name="simulation_results.csv",
         mime="text/csv",
     )
-    st.dataframe(df.head(20), use_container_width=True)
+    st.dataframe(display_df.head(20), width="stretch")
 
 st.divider()
 st.caption(
