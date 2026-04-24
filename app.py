@@ -18,12 +18,12 @@ from simulator import (
 )
 
 st.set_page_config(
-    page_title="Competitive Readout Simulator",
+    page_title="Formula-Based Competitive Readout Simulator",
     page_icon="📊",
     layout="wide",
 )
 
-st.title("Competitive Readout Simulator")
+st.title("Formula-Based Competitive Readout Simulator")
 st.caption(
     "Monte Carlo simulation of event-driven clinical trial timelines. "
     "Adjust assumptions in the sidebar to see how predicted readout dates shift."

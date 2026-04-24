@@ -25,6 +25,14 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+**Gemini-powered AI POC page:**
+```bash
+$env:GEMINI_API_KEY="your_api_key_here"
+streamlit run app.py
+```
+
+After the app launches, open the separate page named **AI Readout Intelligence POC** from the Streamlit sidebar navigation.
+
 **Streamlit Cloud:**
 1. Push this repo to GitHub
 2. Go to share.streamlit.io, click "New app"
@@ -63,6 +71,55 @@ The main panel shows:
 - **Summary table** with P10, P50, P90 predicted dates for each milestone
 - **Histogram** showing the full distribution of predicted readout dates
 - **Sensitivity analysis** showing how readout timing shifts as the hazard ratio changes
+
+---
+
+## AI POC page
+
+The repo now also includes a separate Streamlit page for an early AI proof of concept. It is intentionally isolated from the Monte Carlo simulator so the original experience stays intact.
+
+Current POC scope:
+- **Scrape data** from one or more URLs
+- **Use the ClinicalTrials.gov API by default** when given an NCT ID or CT.gov study URL
+- **Accept analyst notes** as manual context
+- **Let the user choose** URLs, notes, or both as the primary input
+- **Generate a directional decision** using Gemini
+- **Cite evidence** both inline and in an expandable evidence panel
+
+What it is good for:
+- Summarizing competitor updates
+- Pulling directional implications from press releases, conference pages, registry entries, or internal notes
+- Producing a fast, evidence-backed hypothesis about whether a readout timeline may accelerate or slip
+
+What it does not do yet:
+- Scheduling or alerting
+- Automated source monitoring
+- Robust site-specific extraction for paywalled or heavily scripted pages
+
+### How the AI Readout Intelligence POC works
+
+The AI page is designed as a lightweight research assistant layered on top of the simulator, not as a replacement for the formula-based model.
+
+The flow is:
+- The user provides one or more evidence inputs: URLs, analyst notes, or both
+- If the input includes a ClinicalTrials.gov NCT ID or study URL, the app uses the official ClinicalTrials.gov API by default
+- Other URLs are scraped into plain text snippets
+- Analyst notes are packaged as an additional evidence source
+- Gemini receives only the collected evidence plus the user’s decision prompt
+- The response is rendered as:
+  - a directional decision
+  - an evidence-backed summary with inline citations such as `[S1]`
+  - a claim-by-claim breakdown tied to specific sources
+  - an expandable evidence panel showing the extracted source text
+
+In other words, the AI POC is meant to help users quickly digest source material and produce a directional, cited hypothesis about whether a competitor timeline appears accelerated, unchanged, or delayed.
+
+### API key behavior
+
+- The app does not ship with a shared Gemini API key
+- A user must enter their own key in the sidebar, or set `GEMINI_API_KEY` locally in their own environment
+- The key is used to call Gemini from that user’s local session
+- If another person runs the app on their machine, they will need to supply their own key unless they configure their own environment variable
 
 ---
 
