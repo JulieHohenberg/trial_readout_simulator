@@ -1,6 +1,5 @@
-# Competitive Readout Simulator
-
 **Author: Julie Hohenberg**
+# Competitive Readout Simulator
 
 A Monte Carlo simulation tool that predicts when a clinical trial will announce its results ("read out"). Built for competitive intelligence and strategy teams who need to anticipate competitor timelines.
 
