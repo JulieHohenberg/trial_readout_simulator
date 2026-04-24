@@ -14,7 +14,6 @@ Instead of giving a single predicted date, the tool runs thousands of simulated 
 3. [How to use the app](#how-to-use-the-app)
 4. [The math, explained](#the-math-explained)
 5. [Assumptions and limitations](#assumptions-and-limitations)
-6. [Roadmap](#roadmap)
 
 ---
 
