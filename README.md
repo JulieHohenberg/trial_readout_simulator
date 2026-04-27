@@ -74,7 +74,7 @@ The main panel shows:
 
 ---
 
-## AI POC page
+## AI POC page (in progress)
 
 The repo now also includes a separate Streamlit page for an early AI proof of concept. It is intentionally isolated from the Monte Carlo simulator so the original experience stays intact.
 
